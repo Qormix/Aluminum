@@ -6,14 +6,13 @@ plugins {
 }
 
 dependencies {
-    compile wpilib()
-    compile talonSrx()
-    compile navx()
+    compileOnly wpilib()
+    compileOnly talonSrx()
+    compileOnly navx()
 }
 
 jar {
     from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    manifest robotManifest
 }
 
 task wrapper(type: Wrapper) {

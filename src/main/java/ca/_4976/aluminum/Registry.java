@@ -4,7 +4,6 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.VictorSP;
-import javafx.util.Pair;
 
 import java.util.Collections;
 import java.util.Map;
@@ -21,14 +20,14 @@ public class Registry {
 
 			Pair pair = pwm.get(pin);
 
-			if (pair.getValue() instanceof VictorSP) {
+			if (pair.second instanceof VictorSP) {
 
 				DriverStation.reportWarning(new Error("VictorSP already initialized on pin " + pin).getMessage(), true);
 
-				return (VictorSP) pair.getValue();
+				return (VictorSP) pair.second;
 			}
 
-			DriverStation.reportError(new Error("Can't initialize VictorSP on pin " + pin + " already initialized as " + pair.getKey()).getMessage(), true);
+			DriverStation.reportError(new Error("Can't initialize VictorSP on pin " + pin + " already initialized as " + pair.first).getMessage(), true);
 			System.exit(-1);
 		}
 
@@ -43,14 +42,14 @@ public class Registry {
 
 			Pair pair = nodes.get(node);
 
-			if (pair.getValue() instanceof CANTalon) {
+			if (pair.second instanceof CANTalon) {
 
 				DriverStation.reportWarning(new Error("TalonSRX already initialized on node " + node).getMessage(), true);
 
-				return (CANTalon) pair.getValue();
+				return (CANTalon) pair.second;
 			}
 
-			DriverStation.reportError(new Error("Can't initialize TalonSRX on node " + node + " already initialized as " + pair.getKey()).getMessage(), true);
+			DriverStation.reportError(new Error("Can't initialize TalonSRX on node " + node + " already initialized as " + pair.first).getMessage(), true);
 			System.exit(-1);
 		}
 
@@ -65,9 +64,9 @@ public class Registry {
 
 			Pair pair = nodes.get(node);
 
-			if (!pair.getKey().equals("PCM")) {
+			if (!pair.first.equals("PCM")) {
 
-				DriverStation.reportError(new Error("Can't initialize PCM on node " + node + " already initialized as " + pair.getKey()).getMessage(), true);
+				DriverStation.reportError(new Error("Can't initialize PCM on node " + node + " already initialized as " + pair.first).getMessage(), true);
 				System.exit(-1);
 			}
 
@@ -77,11 +76,11 @@ public class Registry {
 
 			Pair pair = pcm.get(-1);
 
-			if (pair.getValue() instanceof Compressor) {
+			if (pair.second instanceof Compressor) {
 
 				DriverStation.reportWarning(new Error("Compressor already initialized on node " + node).getMessage(), true);
 
-				return (Compressor) pair.getValue();
+				return (Compressor) pair.second;
 			}
 		}
 
@@ -96,9 +95,9 @@ public class Registry {
 
 			Pair pair = nodes.get(node);
 
-			if (!pair.getKey().equals("PCM")) {
+			if (!pair.first.equals("PCM")) {
 
-				DriverStation.reportError(new Error("Can't initialize PCM on node " + node + " already initialized as " + pair.getKey()).getMessage(), true);
+				DriverStation.reportError(new Error("Can't initialize PCM on node " + node + " already initialized as " + pair.first).getMessage(), true);
 				System.exit(-1);
 			}
 
@@ -112,15 +111,15 @@ public class Registry {
 
 			Pair pair = pcm.get(i);
 
-			if (pair.getValue() instanceof DoubleSolenoid) {
+			if (pair.second instanceof DoubleSolenoid) {
 
 				DriverStation.reportWarning(new Error("DoubleSolenoid already initialized on node " + node).getMessage(), true);
 
-				return (DoubleSolenoid) pair.getValue();
+				return (DoubleSolenoid) pair.second;
 
 			} else {
 
-				DriverStation.reportError(new Error("Can't initialize DoubleSolenoid on node " + node + " already initialized as " + pair.getKey()).getMessage(), true);
+				DriverStation.reportError(new Error("Can't initialize DoubleSolenoid on node " + node + " already initialized as " + pair.first).getMessage(), true);
 				System.exit(-1);
 			}
 		}

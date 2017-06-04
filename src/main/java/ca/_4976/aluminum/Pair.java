@@ -1,7 +1,13 @@
 package ca._4976.aluminum;
 
-/**
- * Created by Qormix on 2017-06-04.
- */
-public class Pair {
+public class Pair<E, R> {
+
+    public final E first;
+    public final R second;
+
+    public Pair(E first, R second) {
+
+        this.first = first;
+        this.second = second;
+    }
 }
